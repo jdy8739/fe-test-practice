@@ -65,4 +65,19 @@ describe('These are TextFiled tests', () => {
 
     expect(spy).toHaveBeenCalledWith();
   });
+
+  it('should add some styles when TextField is focused.', async () => {
+    const spy = vi.fn();
+
+    const { user } = await render(<TextField onFocus={spy} />);
+
+    const textField = screen.getByPlaceholderText('텍스트를 입력해 주세요.');
+
+    await user.click(textField);
+
+    expect(textField).toHaveStyle({
+      borderWidth: 2,
+      borderColor: 'rgb(25, 118, 210)',
+    });
+  });
 });
